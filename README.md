@@ -32,7 +32,7 @@ run minimize.sh to concatenate all the required files together and then include 
 
 ### Basic usage:
 
-```
+```js
 var app = new WSC.WebApplication(options)
 app.start( callback )
 ```
@@ -45,7 +45,7 @@ options: object, with keys
 - port: int (port to listen on)
 - See relevant options: https://github.com/kzahel/web-server-chrome/blob/master/polymer-ui/options.js
 
-```
+```js
 Handlers
     var handlers = [
         ['/favicon.ico',FavIconHandler],
@@ -57,7 +57,7 @@ Handlers
 
 handlers is an array of 2 element arrays where the first item is a regular expression for the URL and the second is the handler class, which should extend WSC.BaseHandler
 
-```
+```js
     function StaticHandler() {
         this.disk = null
         chrome.runtime.getPackageDirectoryEntry( function(entry) { this.disk = entry }.bind(this) )
