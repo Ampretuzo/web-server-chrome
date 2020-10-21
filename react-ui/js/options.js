@@ -129,6 +129,7 @@ const options = {
     type: Boolean,
     default: false
   },
+  // TODO: static functionality needs to be removed both from configuration options and the server.
   optStatic: {
     label: 'Plain (static) files view',
     help: 'The files directory listing will not use any javascript',

@@ -245,7 +245,22 @@ chrome.app.runtime.onLaunched.addListener(launch);
 
 function get_webapp(opts) {
     if (! window.app) {
-        window.app = new WSC.WebApplication(opts)
+        function DummyHandler(request) {
+            WSC.BaseHandler.prototype.constructor.call(this)
+        }
+        _.extend(DummyHandler.prototype, {
+            get: function() {
+                this.write('I do not care!')
+                this.finish()
+            }
+        }, WSC.BaseHandler.prototype)
+        const handlers = [[
+            '.*', DummyHandler
+        ]]
+        window.app = new WSC.WebApplication({
+            ...opts,
+            handlers
+        })
 		window.webapp = app
     }
     return window.app
