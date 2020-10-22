@@ -1,0 +1,13 @@
+diff --git a/node_modules/localtunnel/lib/TunnelCluster.js b/node_modules/localtunnel/lib/TunnelCluster.js
+index ccb97c8..b2a193b 100644
+--- a/node_modules/localtunnel/lib/TunnelCluster.js
++++ b/node_modules/localtunnel/lib/TunnelCluster.js
+@@ -1,7 +1,7 @@
+ const { EventEmitter } = require('events');
+ const debug = require('debug')('localtunnel:client');
+ const fs = require('fs');
+-const net = require('net');
++const net = require('chrome-net');
+ const tls = require('tls');
+ 
+ const HeaderHostTransformer = require('./HeaderHostTransformer');
