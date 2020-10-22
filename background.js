@@ -245,6 +245,8 @@ chrome.app.runtime.onLaunched.addListener(launch);
 
 function get_webapp(opts) {
     if (! window.app) {
+        
+        // TODO: no dummies!
         function DummyHandler(request) {
             WSC.BaseHandler.prototype.constructor.call(this)
         }
@@ -266,7 +268,8 @@ function get_webapp(opts) {
         let tunnel
 
         (async () => {
-            tunnel = await localtunnel({ subdomain: 'sergi', port: 3000 });
+            // TODO: notify users on firewall issues.  (Connection refused error.)
+            tunnel = await localtunnel({ port: window.app.port, subdomain: 'hardcoded' });
 
             // the assigned public url for your tunnel
             // i.e. https://abcdefgjhij.localtunnel.me
@@ -275,35 +278,12 @@ function get_webapp(opts) {
             tunnel.on('close', () => {
                 // tunnels are closed
             });
+
+            chrome.runtime.onSuspend.addListener(function (evt) {
+                tunnel.close()
+            })
         })();
 
-        // const localtunnel = window.localtunnel;
-        
-        // const makeTunnel = async function() {
-        //     let tunnel;
-        //     console.log('calling localtunnel')
-        //     try {
-        //         tunnel = await localtunnel({ subdomain: 'sergey', port: 8887 });
-        //     } catch (err) {
-        //         console.log('Tunnel fail')
-        //         console.log(err)
-        //         return
-        //     }
-
-        //     // the assigned public url for your tunnel
-        //     // i.e. https://abcdefgjhij.localtunnel.me
-        //     console.log('Got tunnel.url')
-        //     console.log(tunnel.url);
-
-        //     tunnel.on('close', () => {
-        //         // tunnels are closed
-        //         console.log(tunnel.url + ' tunnel was closed.')
-        //     });
-        // }
-        
-        // makeTunnel()
-        // // debugger;
-        
 		window.webapp = app
     }
     return window.app
