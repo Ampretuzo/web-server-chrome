@@ -261,6 +261,49 @@ function get_webapp(opts) {
             ...opts,
             handlers
         })
+ 
+        const localtunnel = window.localtunnel
+        let tunnel
+
+        (async () => {
+            tunnel = await localtunnel({ subdomain: 'sergi', port: 3000 });
+
+            // the assigned public url for your tunnel
+            // i.e. https://abcdefgjhij.localtunnel.me
+            console.log(tunnel.url);
+
+            tunnel.on('close', () => {
+                // tunnels are closed
+            });
+        })();
+
+        // const localtunnel = window.localtunnel;
+        
+        // const makeTunnel = async function() {
+        //     let tunnel;
+        //     console.log('calling localtunnel')
+        //     try {
+        //         tunnel = await localtunnel({ subdomain: 'sergey', port: 8887 });
+        //     } catch (err) {
+        //         console.log('Tunnel fail')
+        //         console.log(err)
+        //         return
+        //     }
+
+        //     // the assigned public url for your tunnel
+        //     // i.e. https://abcdefgjhij.localtunnel.me
+        //     console.log('Got tunnel.url')
+        //     console.log(tunnel.url);
+
+        //     tunnel.on('close', () => {
+        //         // tunnels are closed
+        //         console.log(tunnel.url + ' tunnel was closed.')
+        //     });
+        // }
+        
+        // makeTunnel()
+        // // debugger;
+        
 		window.webapp = app
     }
     return window.app

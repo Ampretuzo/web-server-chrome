@@ -12,6 +12,7 @@
       "scripts": [
         "underscore.js",
         "encoding.js",
+        "npm_packages.js",
         "common.js",
         "log-full.js",
         "mime.js",
@@ -30,6 +31,7 @@
     }
   },
   "permissions": [
+    "https://localtunnel.me/*",
     "alarms",
     "unlimitedStorage",
     "storage",
